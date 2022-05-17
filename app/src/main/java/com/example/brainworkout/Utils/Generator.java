@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.Random;
 
-
 public class Generator {
 
     private static final Random generator = new Random();

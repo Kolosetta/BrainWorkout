@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         pointsCounter = 0;
         binding.textViewPointCounter.setText("0");
     }
-    
+
     public void onClickAnswerBtn(View view) {
         AppCompatButton btn = (AppCompatButton)view;
 

@@ -22,8 +22,7 @@ public class GameResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityGameResultBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
+        
         Intent intent = getIntent();
         if(intent != null && intent.hasExtra("finalScore")) {
             finalScore = String.valueOf(intent.getIntExtra("finalScore", 0));
@@ -32,12 +31,7 @@ public class GameResultActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         maxScore = String.valueOf(preferences.getInt("maxScore", Integer.parseInt(finalScore)));
         binding.recordScoreTextView.setText(maxScore);
-
-
-
-
         binding.finalScoreTextView.setText(finalScore);
-
     }
 
     public void onCLickTryAgain(View view) {
