@@ -22,7 +22,7 @@ public class GameResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityGameResultBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        
+
         Intent intent = getIntent();
         if(intent != null && intent.hasExtra("finalScore")) {
             finalScore = String.valueOf(intent.getIntExtra("finalScore", 0));

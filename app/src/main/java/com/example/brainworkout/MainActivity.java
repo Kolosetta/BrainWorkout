@@ -2,13 +2,11 @@ package com.example.brainworkout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.example.brainworkout.Utils.Exercise;
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         rightAnswer = createAndLoadExercise();
 
         //Таймер на 60 секунд с реализацией анонимного класса
-        timer = new CountDownTimer(5000, 1000){
+        timer = new CountDownTimer(7000, 1000){
 
             @Override
             public void onTick(long l) {
@@ -58,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         timer.start();
-
     }
 
     @Override
@@ -79,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             if(pointsCounter > preferences.getInt("maxScore", 0)) {
                 preferences.edit().putInt("maxScore", pointsCounter).apply();
             }
+            timer.cancel();
             Intent intent = new Intent(MainActivity.this, GameResultActivity.class);
             intent.putExtra("finalScore", String.valueOf(pointsCounter));
             startActivity(intent);
