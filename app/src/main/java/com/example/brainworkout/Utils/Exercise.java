@@ -1,29 +1,25 @@
 package com.example.brainworkout.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Exercise {
 
     String exercise;
-    int rightAnswer;
-    List<Integer> wrongAnswers;
+    ArrayList<Integer> answers;
 
 
-    public Exercise(String exercise, int rightAnswer, List<Integer> wrongAnswers) {
+    public Exercise(String exercise, ArrayList<Integer> answers) {
         this.exercise = exercise;
-        this.rightAnswer = rightAnswer;
-        this.wrongAnswers = wrongAnswers;
+        this.answers = answers;
     }
 
     public String getExercise() {
         return exercise;
     }
 
-    public int getRightAnswer() {
-        return rightAnswer;
+    public ArrayList<Integer> getAnswers() {
+        return answers;
     }
 
-    public List<Integer> getWrongAnswers() {
-        return wrongAnswers;
-    }
 }

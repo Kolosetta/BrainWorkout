@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">BrainWorkout</string>
-    <string name="startTimerValue">00:00</string>
+    <string name="startTimerValue">60</string>
+    <string name="startPointsValue">0</string>
+    <string name="finalScoreHeader">Итоговый счет</string>
+    <string name="recordScoreHeader">Рекорд</string>
+    <string name="tryAgainButton">Попробовать еще раз</string>
 </resources>
