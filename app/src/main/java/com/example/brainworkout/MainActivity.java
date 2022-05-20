@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         rightAnswer = createAndLoadExercise();
 
         //Таймер на 60 секунд с реализацией анонимного класса
-        timer = new CountDownTimer(7000, 1000){
+        timer = new CountDownTimer(10000, 1000){
 
             @Override
             public void onTick(long l) {
@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
         if(btn.getText().toString().equals(rightAnswer)){
             binding.textViewPointCounter.setText(String.valueOf(++pointsCounter));
+            timer.cancel();
+            timer.start();
             rightAnswer = createAndLoadExercise();
         }
         else{
