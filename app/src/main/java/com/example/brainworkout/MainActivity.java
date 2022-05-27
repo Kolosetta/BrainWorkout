@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Toast;
 import com.example.brainworkout.Utils.Exercise;
 import com.example.brainworkout.Utils.Generator;
@@ -29,9 +30,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.button1.setOnClickListener(onClickAnswerBtn(binding.button1));
+        binding.button2.setOnClickListener(onClickAnswerBtn(binding.button2));
+        binding.button3.setOnClickListener(onClickAnswerBtn(binding.button3));
+        binding.button4.setOnClickListener(onClickAnswerBtn(binding.button4));
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         rightAnswer = createAndLoadExercise();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        pointsCounter = 0;
+        binding.textViewPointCounter.setText("0");
 
         //Таймер на 60 секунд с реализацией анонимного класса
         timer = new CountDownTimer(10000, 1000){
@@ -44,28 +57,21 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                int maxScore = preferences.getInt("maxScore", 0);
+                int maxScore = preferences.getInt(MAX_SCORE, 0);
                 if (pointsCounter > maxScore) {
-                    preferences.edit().putInt("maxScore", pointsCounter).apply();
+                    preferences.edit().putInt(MAX_SCORE, pointsCounter).apply();
 
                 }
                 Toast.makeText(MainActivity.this, "Время вышло",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, GameResultActivity.class);
-                intent.putExtra("finalScore", pointsCounter);
+                intent.putExtra(FINAL_SCORE, pointsCounter);
                 startActivity(intent);
             }
         };
         timer.start();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        pointsCounter = 0;
-        binding.textViewPointCounter.setText("0");
-    }
-
-    public void onClickAnswerBtn(View view) {
+    public OnClickListener onClickAnswerBtn(View view) {
         AppCompatButton btn = (AppCompatButton)view;
 
         if(btn.getText().toString().equals(rightAnswer)){
@@ -75,16 +81,16 @@ public class MainActivity extends AppCompatActivity {
             rightAnswer = createAndLoadExercise();
         }
         else{
-            if(pointsCounter > preferences.getInt("maxScore", 0)) {
-                preferences.edit().putInt("maxScore", pointsCounter).apply();
+            if(pointsCounter > preferences.getInt(MAX_SCORE, 0)) {
+                preferences.edit().putInt(MAX_SCORE, pointsCounter).apply();
             }
             timer.cancel();
             Intent intent = new Intent(MainActivity.this, GameResultActivity.class);
-            intent.putExtra("finalScore", String.valueOf(pointsCounter));
+            intent.putExtra(FINAL_SCORE, String.valueOf(pointsCounter));
             startActivity(intent);
         }
+        return null;
     }
-
 
     protected String createAndLoadExercise(){
         Exercise curExercise = Generator.generateExercise();
@@ -99,4 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
         return rightAnswer;
     }
+
+    protected static final String MAX_SCORE = "maxScore";
+    protected static final String FINAL_SCORE = "maxScore";
+
 }
