@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         binding.textViewPointCounter.setText("0");
 
         //Таймер на 60 секунд с реализацией анонимного класса
-        timer = new CountDownTimer(10000, 1000){
+        timer = new CountDownTimer(12000, 1000){
 
             @Override
             public void onTick(long l) {
